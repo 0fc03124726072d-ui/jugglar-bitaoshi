@@ -1,0 +1,3 @@
+#game-container { display: flex; justify-content: center; height: 300px; overflow: hidden; }
+.reel { width: 100px; transition: transform 0.1s linear; }
+.reel img { width: 100%; display: block; }
