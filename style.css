@@ -1,53 +1,19 @@
 /* style.css */
-body {
-    background: #333;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
-}
+body { background: #333; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+#game-container { display: flex; width: 315px; height: 300px; overflow: hidden; border: 5px solid #555; background: black; position: relative; }
 
-#game-container {
-    display: flex;
-    width: 315px; /* 105px * 3列 */
-    height: 300px; /* 100px * 3段表示 */
-    overflow: hidden;
-    border: 5px solid #555;
-    background: black;
-    position: relative;
+.reel { 
+    width: 105px; height: 300px; 
+    /* 縦に並んだ画像を背景として指定 */
+    background-repeat: repeat-y;
+    flex-shrink: 0;
 }
+/* アップロードした画像を指定 */
+#reel1 { background-image: url('images/IMG_3461.jpg'); }
+#reel2 { background-image: url('images/IMG_3461 2.jpg'); }
+#reel3 { background-image: url('images/IMG_3461 3.jpg'); }
 
-.reel {
-    width: 105px;
-    height: 300px;
-    display: flex;
-    flex-direction: column;
-    flex-shrink: 0; /* ここが重要：リールが横に縮まないように固定 */
-}
-
-.reel img {
-    width: 105px;
-    height: 100px;
-    display: block; /* 画像下の謎の隙間を消す */
-}
-
-/* ビタ押し判定の赤枠 */
-#game-container::after {
-    content: '';
-    position: absolute;
-    top: 100px;
-    left: 0;
-    width: 100%;
-    height: 100px;
-    border-top: 2px solid red;
-    border-bottom: 2px solid red;
-    pointer-events: none;
-}
-
-.controls {
-    margin-top: 20px;
-    display: flex;
-    gap: 10px;
+#game-container::after { 
+    content: ''; position: absolute; top: 100px; left: 0; width: 315px; height: 100px; 
+    border-top: 2px solid red; border-bottom: 2px solid red; pointer-events: none; 
 }
