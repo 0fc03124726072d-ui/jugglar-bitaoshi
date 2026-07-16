@@ -1,14 +1,22 @@
-// script.js
+// script.js (回転速度を0.87秒に固定)
 let positions = [0, 0, 0];
 let isSpinning = [false, false, false];
-const SPEED = 25; // 回転スピード
-const FRAME = 100; // 1コマの高さ
+const FRAME = 100;
+const ONE_LAP_TIME = 870; // 0.87秒 = 870ミリ秒
+const TOTAL_HEIGHT = 2100; // 21コマ分
 
-function update() {
+let lastTime = 0;
+
+function update(timestamp) {
+    if (!lastTime) lastTime = timestamp;
+    let deltaTime = timestamp - lastTime;
+    lastTime = timestamp;
+
     ['reel1', 'reel2', 'reel3'].forEach((id, i) => {
         if (isSpinning[i]) {
-            // 背景位置を動かすことでリールを回転させる
-            positions[i] = (positions[i] + SPEED) % 2100;
+            // 時間に基づいて位置を計算（1周0.87秒の動き）
+            let speedPerMs = TOTAL_HEIGHT / ONE_LAP_TIME;
+            positions[i] = (positions[i] + (speedPerMs * deltaTime)) % TOTAL_HEIGHT;
             document.getElementById(id).style.backgroundPosition = `0px ${positions[i]}px`;
         }
     });
@@ -19,12 +27,16 @@ function stopReel(i) {
     if (!isSpinning[i]) return;
     isSpinning[i] = false;
     
-    // 停止位置の引き込み計算
-    let offset = positions[i] % FRAME;
-    positions[i] = (offset > 50) ? positions[i] + (FRAME - offset) : positions[i] - offset;
+    // 停止時の引き込み処理
+    let remainder = positions[i] % FRAME;
+    let adjustment = (remainder > 50) ? (FRAME - remainder) : -remainder;
+    positions[i] = (positions[i] + adjustment + TOTAL_HEIGHT) % TOTAL_HEIGHT;
     document.getElementById(['reel1', 'reel2', 'reel3'][i]).style.backgroundPosition = `0px ${positions[i]}px`;
 }
 
-function restartAll() { isSpinning = [true, true, true]; }
+function restartAll() { 
+    isSpinning = [true, true, true]; 
+    lastTime = performance.now(); // タイミングをリセット
+}
 
-update();
+requestAnimationFrame(update);
