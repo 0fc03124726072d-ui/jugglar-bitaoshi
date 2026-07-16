@@ -1,13 +1,18 @@
-// 【最終版】画像の順番（21番〜1番）を忠実に反映
+// 図柄のファイルパス定義
+const IMG = {
+    bell:   'images/IMG_3471.jpg',
+    seven:  'images/IMG_3468.jpg',
+    sai:    'images/IMG_3473.jpg', // さい(チェリー)
+    grape:  'images/IMG_3472.jpg',
+    bar:    'images/IMG_3470.jpg',
+    clown:  'images/IMG_3474.jpg'
+};
+
+// IMG_3461.jpg の21番から1番の順序を反映
 const REELS_DATA = {
-    // 左リール: 21(ベル), 20(7), 19(さい), 18(ぶどう), 17(さい), 16(ぶどう), 15(BAR), 14(チェリー), 13(ぶどう), 12(さい), 11(ぶどう), 10(7), 9(ぴえろ), 8(ぶどう), 7(さい), 6(ぶどう), 5(チェリー), 4(BAR), 3(ぶどう), 2(さい), 1(ぶどう)
-    reel1: ['images/IMG_3471.jpg', 'images/IMG_3468.jpg', 'images/IMG_3473.jpg', 'images/IMG_3472.jpg', 'images/IMG_3473.jpg', 'images/IMG_3472.jpg', 'images/IMG_3470.jpg', 'images/IMG_3473.jpg', 'images/IMG_3472.jpg', 'images/IMG_3473.jpg', 'images/IMG_3472.jpg', 'images/IMG_3468.jpg', 'images/IMG_3474.jpg', 'images/IMG_3472.jpg', 'images/IMG_3473.jpg', 'images/IMG_3472.jpg', 'images/IMG_3473.jpg', 'images/IMG_3470.jpg', 'images/IMG_3472.jpg', 'images/IMG_3473.jpg', 'images/IMG_3472.jpg'],
-    
-    // 中リール: 21(さい), 20(7), 19(ぶどう), 18(チェリー), 17(さい), 16(ベル), 15(ぶどう), 14(チェリー), 13(さい), 12(BAR), 11(ぶどう), 10(チェリー), 9(さい), 8(ベル), 7(ぶどう), 6(チェリー), 5(さい), 4(BAR), 3(ぶどう), 2(チェリー), 1(ぴえろ)
-    reel2: ['images/IMG_3473.jpg', 'images/IMG_3468.jpg', 'images/IMG_3472.jpg', 'images/IMG_3473.jpg', 'images/IMG_3473.jpg', 'images/IMG_3471.jpg', 'images/IMG_3472.jpg', 'images/IMG_3473.jpg', 'images/IMG_3473.jpg', 'images/IMG_3470.jpg', 'images/IMG_3472.jpg', 'images/IMG_3473.jpg', 'images/IMG_3473.jpg', 'images/IMG_3471.jpg', 'images/IMG_3472.jpg', 'images/IMG_3473.jpg', 'images/IMG_3473.jpg', 'images/IMG_3470.jpg', 'images/IMG_3472.jpg', 'images/IMG_3473.jpg', 'images/IMG_3474.jpg'],
-    
-    // 右リール: 21(ぶどう), 20(7), 19(BAR), 18(ベル), 17(さい), 16(ぶどう), 15(ぴえろ), 14(ベル), 13(さい), 12(ぶどう), 11(ぴえろ), 10(ベル), 9(さい), 8(ぶどう), 7(ぴえろ), 6(ベル), 5(さい), 4(ぶどう), 3(ぴえろ), 2(ベル), 1(さい)
-    reel3: ['images/IMG_3472.jpg', 'images/IMG_3468.jpg', 'images/IMG_3470.jpg', 'images/IMG_3471.jpg', 'images/IMG_3473.jpg', 'images/IMG_3472.jpg', 'images/IMG_3474.jpg', 'images/IMG_3471.jpg', 'images/IMG_3473.jpg', 'images/IMG_3472.jpg', 'images/IMG_3474.jpg', 'images/IMG_3471.jpg', 'images/IMG_3473.jpg', 'images/IMG_3472.jpg', 'images/IMG_3474.jpg', 'images/IMG_3471.jpg', 'images/IMG_3473.jpg', 'images/IMG_3472.jpg', 'images/IMG_3474.jpg', 'images/IMG_3471.jpg', 'images/IMG_3473.jpg']
+    reel1: [IMG.bell, IMG.seven, IMG.sai, IMG.grape, IMG.sai, IMG.grape, IMG.bar, IMG.sai, IMG.grape, IMG.sai, IMG.grape, IMG.seven, IMG.clown, IMG.grape, IMG.sai, IMG.grape, IMG.sai, IMG.bar, IMG.grape, IMG.sai, IMG.grape],
+    reel2: [IMG.sai, IMG.seven, IMG.grape, IMG.sai, IMG.sai, IMG.bell, IMG.grape, IMG.sai, IMG.sai, IMG.bar, IMG.grape, IMG.sai, IMG.sai, IMG.bell, IMG.grape, IMG.sai, IMG.sai, IMG.bar, IMG.grape, IMG.sai, IMG.clown],
+    reel3: [IMG.grape, IMG.seven, IMG.bar, IMG.bell, IMG.sai, IMG.grape, IMG.clown, IMG.bell, IMG.sai, IMG.grape, IMG.clown, IMG.bell, IMG.sai, IMG.grape, IMG.clown, IMG.bell, IMG.sai, IMG.grape, IMG.clown, IMG.bell, IMG.sai]
 };
 
 const FRAME_HEIGHT = 100;
@@ -33,8 +38,8 @@ function setup() {
 function update() {
     ['reel1', 'reel2', 'reel3'].forEach((id, i) => {
         if (isSpinning[i]) {
-            // 下から上に流れる動き（加算して上に移動）
-            positions[i] = (positions[i] + SPEED) % (21 * FRAME_HEIGHT);
+            // 下から上に流れる動き（減算ロジック）
+            positions[i] = (positions[i] - SPEED + (21 * FRAME_HEIGHT)) % (21 * FRAME_HEIGHT);
             document.getElementById(id).style.transform = `translateY(-${positions[i]}px)`;
         }
     });
@@ -43,16 +48,19 @@ function update() {
 
 function stopReel(i) {
     isSpinning[i] = false;
-    let remainder = positions[i] % FRAME_HEIGHT;
+    // 停止位置を100px単位に補正
+    let remainder = Math.abs(positions[i] % FRAME_HEIGHT);
     if (remainder > FRAME_HEIGHT / 2) {
-        positions[i] += (FRAME_HEIGHT - remainder);
+        positions[i] -= (FRAME_HEIGHT - remainder);
     } else {
-        positions[i] -= remainder;
+        positions[i] += remainder;
     }
     document.getElementById(['reel1', 'reel2', 'reel3'][i]).style.transform = `translateY(-${positions[i]}px)`;
 }
 
-function restartAll() { isSpinning = [true, true, true]; }
+function restartAll() {
+    isSpinning = [true, true, true];
+}
 
 setup();
 update();
