@@ -1,15 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="style.css">
-</head>
 <body>
     <div id="game-container">
         <div class="reel" id="reel1"></div>
         <div class="reel" id="reel2"></div>
         <div class="reel" id="reel3"></div>
     </div>
-    <button onclick="stopReel()">STOP</button>
+    <div class="button-container">
+        <button onclick="stopReel(0)">STOP 1</button>
+        <button onclick="stopReel(1)">STOP 2</button>
+        <button onclick="stopReel(2)">STOP 3</button>
+    </div>
+    <button onclick="resetReels()" style="margin-top: 10px;">全リール再始動</button>
     <script src="script.js"></script>
 </body>
-</html>
