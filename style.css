@@ -19,10 +19,13 @@ body { background: #333; display: flex; flex-direction: column; align-items: cen
     background-size: 105px 2100px; 
 }
 
-/* ID1=左, ID2=中, ID3=右 になるよう画像を割り当てました */
+/* 修正：
+   reel2（中リール）に、中身が中リールの絵である IMG_34613.jpg を指定
+   reel3（右リール）に、中身が右リールの絵である IMG_34612.jpg を指定
+*/
 #reel1 { background-image: url('images/IMG_34611.jpg'); }
-#reel2 { background-image: url('images/IMG_34612.jpg'); }
-#reel3 { background-image: url('images/IMG_34613.jpg'); }
+#reel2 { background-image: url('images/IMG_34613.jpg'); } 
+#reel3 { background-image: url('images/IMG_34612.jpg'); } 
 
 #game-container::after { 
     content: ''; position: absolute; top: 100px; left: 0; width: 315px; height: 100px; 
