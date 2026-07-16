@@ -1,9 +1,9 @@
-/* style.css (804px版・ファイル名対応済み) */
+/* style.css */
 body { background: #333; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; margin: 0; }
 
 #game-container { 
     display: flex; 
-    width: 804px; 
+    width: 810px; /* 270px × 3列 */
     height: 600px; 
     overflow: hidden; 
     border: 10px solid #555; 
@@ -12,20 +12,19 @@ body { background: #333; display: flex; flex-direction: column; align-items: cen
 }
 
 .reel { 
-    width: 268px; 
+    width: 270px; /* 1リール270px */
     height: 600px; 
     background-repeat: repeat-y;
     flex-shrink: 0;
-    /* 強制的に268px幅・縦2100pxに固定してガタつきを防止 */
-    background-size: 268px 2100px; 
+    /* 幅270px、縦2100pxに強制設定 */
+    background-size: 270px 2100px; 
 }
 
-/* GitHub上のファイル名に正確に合わせる */
 #reel1 { background-image: url('images/IMG_3461.jpg'); }
 #reel2 { background-image: url('images/IMG_3461%202.jpg'); }
 #reel3 { background-image: url('images/IMG_3461%203.jpg'); }
 
 #game-container::after { 
-    content: ''; position: absolute; top: 200px; left: 0; width: 804px; height: 200px; 
+    content: ''; position: absolute; top: 200px; left: 0; width: 810px; height: 200px; 
     border-top: 4px solid red; border-bottom: 4px solid red; pointer-events: none; 
 }
