@@ -19,10 +19,10 @@ body { background: #333; display: flex; flex-direction: column; align-items: cen
     background-size: 105px 2100px; 
 }
 
-/* 新しいファイル名で指定 */
+/* ここを入れ替えました */
 #reel1 { background-image: url('images/IMG_34611.jpg'); }
-#reel2 { background-image: url('images/IMG_34612.jpg'); }
-#reel3 { background-image: url('images/IMG_34613.jpg'); }
+#reel2 { background-image: url('images/IMG_34613.jpg'); } /* 中リールを3に */
+#reel3 { background-image: url('images/IMG_34612.jpg'); } /* 右リールを2に */
 
 #game-container::after { 
     content: ''; position: absolute; top: 100px; left: 0; width: 315px; height: 100px; 
