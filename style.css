@@ -1,20 +1,31 @@
-/* style.css */
-body { background: #333; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; }
-#game-container { display: flex; width: 315px; height: 300px; overflow: hidden; border: 5px solid #555; background: black; position: relative; }
+/* style.css (804px版・ファイル名対応済み) */
+body { background: #333; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; margin: 0; }
 
-.reel { 
-    width: 105px; height: 300px; 
-    background-repeat: repeat-y;
-    flex-shrink: 0;
-    /* 【超重要】画像のサイズを枠に強制フィットさせる設定 */
-    background-size: 105px auto; 
+#game-container { 
+    display: flex; 
+    width: 804px; 
+    height: 600px; 
+    overflow: hidden; 
+    border: 10px solid #555; 
+    background: black; 
+    position: relative; 
 }
 
+.reel { 
+    width: 268px; 
+    height: 600px; 
+    background-repeat: repeat-y;
+    flex-shrink: 0;
+    /* 強制的に268px幅・縦2100pxに固定してガタつきを防止 */
+    background-size: 268px 2100px; 
+}
+
+/* GitHub上のファイル名に正確に合わせる */
 #reel1 { background-image: url('images/IMG_3461.jpg'); }
-#reel2 { background-image: url('images/IMG_3461 2.jpg'); }
-#reel3 { background-image: url('images/IMG_3461 3.jpg'); }
+#reel2 { background-image: url('images/IMG_3461%202.jpg'); }
+#reel3 { background-image: url('images/IMG_3461%203.jpg'); }
 
 #game-container::after { 
-    content: ''; position: absolute; top: 100px; left: 0; width: 315px; height: 100px; 
-    border-top: 2px solid red; border-bottom: 2px solid red; pointer-events: none; 
+    content: ''; position: absolute; top: 200px; left: 0; width: 804px; height: 200px; 
+    border-top: 4px solid red; border-bottom: 4px solid red; pointer-events: none; 
 }
