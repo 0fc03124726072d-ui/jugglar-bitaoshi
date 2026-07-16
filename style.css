@@ -4,11 +4,12 @@ body { background: #333; display: flex; flex-direction: column; align-items: cen
 
 .reel { 
     width: 105px; height: 300px; 
-    /* 縦に並んだ画像を背景として指定 */
     background-repeat: repeat-y;
     flex-shrink: 0;
+    /* 【超重要】画像のサイズを枠に強制フィットさせる設定 */
+    background-size: 105px auto; 
 }
-/* アップロードした画像を指定 */
+
 #reel1 { background-image: url('images/IMG_3461.jpg'); }
 #reel2 { background-image: url('images/IMG_3461 2.jpg'); }
 #reel3 { background-image: url('images/IMG_3461 3.jpg'); }
