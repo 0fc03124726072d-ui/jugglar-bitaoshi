@@ -1,5 +1,53 @@
-body { background: #333; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; }
-#game-container { display: flex; gap: 5px; width: 315px; height: 100px; overflow: hidden; border: 5px solid #555; background: black; }
-.reel { display: flex; flex-direction: column; width: 100px; }
-.button-area { display: flex; gap: 10px; margin-top: 20px; }
+body { 
+    background: #333; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    height: 100vh; 
+    margin: 0; 
+}
+
+/* 3コマ分(300px)の高さに変更 */
+#game-container { 
+    display: flex; 
+    gap: 5px; 
+    width: 315px; 
+    height: 300px; 
+    overflow: hidden; 
+    border: 5px solid #555; 
+    background: black; 
+    position: relative; /* ガイド線配置のために必要 */
+}
+
+/* 真ん中のコマに合わせるための赤いビタ押しガイド線 */
+#game-container::after { 
+    content: ''; 
+    position: absolute; 
+    top: 100px; 
+    left: 0; 
+    width: 100%; 
+    height: 100px; 
+    border-top: 2px solid red; 
+    border-bottom: 2px solid red; 
+    pointer-events: none; /* クリックを邪魔しないようにする */
+}
+
+.reel { 
+    display: flex; 
+    flex-direction: column; 
+    width: 100px; 
+}
+
+.button-area { 
+    display: flex; 
+    gap: 10px; 
+    margin-top: 20px; 
+    flex-direction: column; 
+    align-items: center; 
+}
+
+/* ボタンの見た目を整える */
+.stop-buttons { display: flex; gap: 10px; }
 button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+.restart-btn { background: gold; font-weight: bold; padding: 10px 30px; }
