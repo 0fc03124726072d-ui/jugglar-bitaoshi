@@ -19,10 +19,10 @@ body { background: #333; display: flex; flex-direction: column; align-items: cen
     background-size: 105px 2100px; 
 }
 
-/* ここを入れ替えました */
+/* ID1=左, ID2=中, ID3=右 になるよう画像を割り当てました */
 #reel1 { background-image: url('images/IMG_34611.jpg'); }
-#reel2 { background-image: url('images/IMG_34613.jpg'); } /* 中リールを3に */
-#reel3 { background-image: url('images/IMG_34612.jpg'); } /* 右リールを2に */
+#reel2 { background-image: url('images/IMG_34612.jpg'); }
+#reel3 { background-image: url('images/IMG_34613.jpg'); }
 
 #game-container::after { 
     content: ''; position: absolute; top: 100px; left: 0; width: 315px; height: 100px; 
