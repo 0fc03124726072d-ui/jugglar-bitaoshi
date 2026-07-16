@@ -19,10 +19,10 @@ body { background: #333; display: flex; flex-direction: column; align-items: cen
     background-size: 105px 2100px; 
 }
 
-/* GitHubの画像名に完全に一致させています */
-#reel1 { background-image: url('images/IMG_3461%201.jpg'); }
-#reel2 { background-image: url('images/IMG_3461202%202.jpg'); }
-#reel3 { background-image: url('images/IMG_3461203%203.jpg'); }
+/* 新しいファイル名で指定 */
+#reel1 { background-image: url('images/IMG_34611.jpg'); }
+#reel2 { background-image: url('images/IMG_34612.jpg'); }
+#reel3 { background-image: url('images/IMG_34613.jpg'); }
 
 #game-container::after { 
     content: ''; position: absolute; top: 100px; left: 0; width: 315px; height: 100px; 
