@@ -1,8 +1,52 @@
-body { background: #333; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; }
-#game-container { display: flex; width: 315px; height: 300px; overflow: hidden; border: 5px solid #555; background: black; position: relative; }
-/* 重要な修正：個別のリールが横に飛ばないよう明示的に指定 */
-.reel { width: 105px; height: 300px; } 
-#game-container::after { content: ''; position: absolute; top: 100px; left: 0; width: 100%; height: 100px; border-top: 2px solid red; border-bottom: 2px solid red; pointer-events: none; }
+body { 
+    background: #333; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    height: 100vh; 
+    margin: 0; 
+}
+
+#game-container { 
+    display: flex; 
+    /* リールを横に並べるためのコンテナ */
+    width: 315px; 
+    height: 300px; 
+    overflow: hidden; 
+    border: 5px solid #555; 
+    background: black; 
+    position: relative; 
+}
+
+/* 各リールが横に流れないよう固定 */
+.reel { 
+    width: 105px; 
+    height: 300px; /* ウィンドウの高さ */
+    flex-shrink: 0; /* 横に縮まないようにする */
+    position: relative;
+    overflow: hidden; /* 中の画像がはみ出ないように */
+}
+
+/* 画像を縦一列に並べる */
+.reel img {
+    width: 105px; 
+    height: 100px;
+    display: block;
+}
+
+#game-container::after { 
+    content: ''; 
+    position: absolute; 
+    top: 100px; 
+    left: 0; 
+    width: 100%; 
+    height: 100px; 
+    border-top: 2px solid red; 
+    border-bottom: 2px solid red; 
+    pointer-events: none; 
+}
+
 .button-area { display: flex; gap: 10px; margin-top: 20px; flex-direction: column; align-items: center; }
 .stop-buttons { display: flex; gap: 10px; }
 button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
