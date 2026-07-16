@@ -1,9 +1,9 @@
-// script.js (回転速度を0.87秒に固定)
+// script.js
 let positions = [0, 0, 0];
 let isSpinning = [false, false, false];
-const FRAME = 100;
-const ONE_LAP_TIME = 870; // 0.87秒 = 870ミリ秒
-const TOTAL_HEIGHT = 2100; // 21コマ分
+const FRAME = 200; // 1コマの高さを200px
+const ONE_LAP_TIME = 870; 
+const TOTAL_HEIGHT = 4200; // 21コマ × 200px
 
 let lastTime = 0;
 
@@ -14,7 +14,6 @@ function update(timestamp) {
 
     ['reel1', 'reel2', 'reel3'].forEach((id, i) => {
         if (isSpinning[i]) {
-            // 時間に基づいて位置を計算（1周0.87秒の動き）
             let speedPerMs = TOTAL_HEIGHT / ONE_LAP_TIME;
             positions[i] = (positions[i] + (speedPerMs * deltaTime)) % TOTAL_HEIGHT;
             document.getElementById(id).style.backgroundPosition = `0px ${positions[i]}px`;
@@ -27,16 +26,17 @@ function stopReel(i) {
     if (!isSpinning[i]) return;
     isSpinning[i] = false;
     
-    // 停止時の引き込み処理
+    // 200px単位での停止処理
     let remainder = positions[i] % FRAME;
-    let adjustment = (remainder > 50) ? (FRAME - remainder) : -remainder;
+    let adjustment = (remainder > 100) ? (FRAME - remainder) : -remainder;
     positions[i] = (positions[i] + adjustment + TOTAL_HEIGHT) % TOTAL_HEIGHT;
+    
     document.getElementById(['reel1', 'reel2', 'reel3'][i]).style.backgroundPosition = `0px ${positions[i]}px`;
 }
 
 function restartAll() { 
     isSpinning = [true, true, true]; 
-    lastTime = performance.now(); // タイミングをリセット
+    lastTime = performance.now();
 }
 
 requestAnimationFrame(update);
