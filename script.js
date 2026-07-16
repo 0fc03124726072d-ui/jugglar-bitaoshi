@@ -1,9 +1,9 @@
 // script.js
 let positions = [0, 0, 0];
 let isSpinning = [false, false, false];
-const FRAME = 100;
-const ONE_LAP_TIME = 870; 
-const TOTAL_HEIGHT = 2100;
+const FRAME = 100; // 1コマ100px
+const ONE_LAP_TIME = 870; // 1周0.87秒
+const TOTAL_HEIGHT = 2100; // 21コマ × 100px
 
 let lastTime = 0;
 
@@ -26,6 +26,7 @@ function stopReel(i) {
     if (!isSpinning[i]) return;
     isSpinning[i] = false;
     
+    // 停止時の引き込み処理
     let remainder = positions[i] % FRAME;
     let adjustment = (remainder > 50) ? (FRAME - remainder) : -remainder;
     positions[i] = (positions[i] + adjustment + TOTAL_HEIGHT) % TOTAL_HEIGHT;
